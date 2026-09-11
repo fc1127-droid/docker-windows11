@@ -1,0 +1,28 @@
+services:
+  windows11:
+    image: dockurr/windows:latest
+    container_name: windows11
+
+    environment:
+      VERSION: "11"
+      RAM_SIZE: "3G"
+      CPU_CORES: "2"
+      DISK_SIZE: "32G"
+      USERNAME: "Ben"
+      PASSWORD: "1123581321"
+
+    devices:
+      - /dev/kvm
+
+    cap_add:
+      - NET_ADMIN
+
+    ports:
+      - "8006:8006"
+      - "3389:3389/tcp"
+
+    volumes:
+      - ./windows/data:/storage
+
+    restart: unless-stopped
+    stop_grace_period: 2m
