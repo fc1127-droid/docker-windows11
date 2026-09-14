@@ -1,0 +1,58 @@
+{
+    "name": "Windows 11 Codespace",
+
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "overrideCommand": false,
+
+    "mounts": [
+        "source=var-lib-docker,target=/var/lib/docker,type=volume"
+    ],
+
+    "workspaceFolder": "/workspaces/docker-windows11",
+
+    "forwardPorts": [
+        3389,
+        5900,
+        8006
+    ],
+
+    "portsAttributes": {
+        "3389": {
+            "label": "Windows 11 RDP",
+            "protocol": "tcp",
+            "onAutoForward": "notify"
+        },
+        "5900": {
+            "label": "Windows 11 VNC",
+            "protocol": "tcp",
+            "onAutoForward": "notify"
+        },
+        "8006": {
+            "label": "Windows 11 Web",
+            "protocol": "http",
+            "onAutoForward": "notify"
+        }
+    },
+
+    "privileged": true,
+
+    "runArgs": [
+        "--device=/dev/kvm",
+        "--device=/dev/net/tun",
+        "--device=/dev/vhost-net"
+    ],
+
+    "securityOpt": [
+        "seccomp=unconfined"
+    ],
+
+    "containerUser": "root",
+    "remoteUser": "root",
+
+    "postStartCommand": "bash /workspaces/docker-windows11/start-windows.sh",
+
+    "waitFor": "postStartCommand"
+}
