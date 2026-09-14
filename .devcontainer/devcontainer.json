@@ -15,7 +15,6 @@
 
     "forwardPorts": [
         3389,
-        5900,
         8006
     ],
 
@@ -25,15 +24,10 @@
             "protocol": "tcp",
             "onAutoForward": "notify"
         },
-        "5900": {
-            "label": "Windows 11 VNC",
-            "protocol": "tcp",
-            "onAutoForward": "notify"
-        },
         "8006": {
             "label": "Windows 11 Web",
             "protocol": "http",
-            "onAutoForward": "notify"
+            "onAutoForward": "openBrowser"
         }
     },
 
@@ -49,8 +43,7 @@
         "seccomp=unconfined"
     ],
 
-    "containerUser": "root",
-    "remoteUser": "root",
+    "remoteUser": "codespace",
 
     "postStartCommand": "bash /workspaces/docker-windows11/start-windows.sh",
 
