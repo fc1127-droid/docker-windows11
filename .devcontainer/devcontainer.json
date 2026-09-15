@@ -1,15 +1,11 @@
 {
     "name": "Windows 11 Codespace",
 
-    "build": {
-        "dockerfile": "Dockerfile"
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:4": {}
     },
-
-    "overrideCommand": false,
-
-    "mounts": [
-        "source=var-lib-docker,target=/var/lib/docker,type=volume"
-    ],
 
     "workspaceFolder": "/workspaces/docker-windows11",
 
@@ -32,6 +28,27 @@
     },
 
     "privileged": true,
+
+    "runArgs": [
+        "--device=/dev/kvm",
+        "--device=/dev/net/tun",
+        "--device=/dev/vhost-net"
+    ],
+
+    "securityOpt": [
+        "seccomp=unconfined"
+    ],
+
+    "mounts": [
+        "source=var-lib-docker,target=/var/lib/docker,type=volume"
+    ],
+
+    "remoteUser": "vscode",
+
+    "postStartCommand": "sudo bash /workspaces/docker-windows11/start-windows.sh",
+
+    "waitFor": "postStartCommand"
+}ileged": true,
 
     "runArgs": [
         "--device=/dev/kvm",
