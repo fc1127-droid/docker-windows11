@@ -10,7 +10,7 @@ echo "========================================"
 echo "[1/5] 等待 Docker..."
 
 for i in $(seq 1 120); do
-    if docker info >/dev/null 2>&1; then
+    if sudo docker info >/dev/null 2>&1; then
         echo "Docker daemon OK"
         break
     fi
@@ -19,7 +19,7 @@ for i in $(seq 1 120); do
         echo "ERROR: Docker daemon 尚未就緒。"
         echo
         echo "===== Docker info ====="
-        docker info || true
+        sudo docker info || true
         exit 1
     fi
 
@@ -47,15 +47,15 @@ df -h .
 
 echo "[5/5] 啟動 Windows..."
 
-docker compose up -d
+sudo docker compose up -d
 
 echo
 echo "========================================"
 echo " Windows 11 container 已啟動"
 echo "========================================"
 
-docker compose ps
+sudo docker compose ps
 
 echo
 echo "查看 Windows 日誌："
-echo "docker logs -f windows11"
+echo "sudo docker logs -f windows11"
